@@ -1,5 +1,6 @@
 import React from 'react';
 import HomeLayout from '../layouts/HomeLayout'
+import PropTypes from 'prop-types'
 
 class UserList extends React.Component {
 
@@ -21,7 +22,7 @@ class UserList extends React.Component {
   }
 
   handleEdit (user) {
-
+    this.context.router.push('/user/edit/' + user.id);
   }
     
   handleDel (user) {
@@ -84,5 +85,9 @@ class UserList extends React.Component {
     );
   }
 }
+
+UserList.contextTypes = {
+  router: PropTypes.object.isRequired
+};
 
 export default UserList;

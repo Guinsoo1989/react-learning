@@ -1,96 +1,16 @@
 import React from 'react';
-import FormItem from '../components/FormItem';
-import formProvider from '../utils/formProvider';
-import PropTypes from 'prop-types'
 import HomeLayout from '../layouts/HomeLayout'
+import UserEditor from '../components/UserEditor';
 
 class UserAdd extends React.Component {
-
-  
-
   render () {
     const {form: {name, age, gender}, onFormChange} = this.props;
     return (
       <HomeLayout title="添加用户">
-        <form onSubmit={(e)=>this.handleSubmit(e)}>
-          <FormItem label="用户名：" valid={name.valid} error={name.error}>
-            <input
-              type="text"
-              value={name.value}
-              onChange={(e) => onFormChange('name', e.target.value)}
-            />
-          </FormItem>
-          <FormItem label="年龄：" valid={age.valid} error={age.error}>
-            <input
-              type="number"
-              value={age.value || ''}
-              onChange={(e) => onFormChange('age', +e.target.value)}
-            />
-          </FormItem>
-          <FormItem label="性别：" valid={gender.valid} error={gender.error}>
-            <select
-              value={gender.value}
-              onChange={(e) => onFormChange('gender', e.target.value)}
-            >
-              <option value="">请选择</option>
-              <option value="male">男</option>
-              <option value="female">女</option>
-            </select>
-          </FormItem>
-          <br/>
-          <input type="submit" value="提交"/>
-        </form>
+        <UserEditor/>
       </HomeLayout>
     );
   }
 }
-
-// 必须给UserAdd定义一个包含router属性的contextTypes
-// 使得组件中可以通过this.context.router来使用React Router提供的方法
-UserAdd.contextTypes = {
-  router: PropTypes.object.isRequired
-};
-
-UserAdd = formProvider({
-  name: {
-    defaultValue: '',
-    rules: [
-      {
-        pattern: function (value) {
-          return value.length > 0;
-        },
-        error: '请输入用户名'
-      },
-      {
-        pattern: /^.{1,4}$/,
-        error: '用户名最多4个字符'
-      }
-    ]
-  },
-  age: {
-    defaultValue: 0,
-    rules: [
-      {
-        pattern: function (value) {
-          return value >= 1 && value <= 100;
-        },
-        error: '请输入1~100的年龄'
-      }
-    ]
-  },
-  gender: {
-    defaultValue: '',
-    rules: [
-      {
-        pattern: function (value) {
-          return !!value;
-        },
-        error: '请选择性别'
-      }
-    ]
-  }
-})(UserAdd)
-
-
 
 export default UserAdd;
