@@ -6,42 +6,7 @@ import HomeLayout from '../layouts/HomeLayout'
 
 class UserAdd extends React.Component {
 
-  handleSubmit (e) {
-    // 阻止表单submit事件自动跳转页面的动作
-    e.preventDefault();
-
-    const {form: {name, age, gender}, formValid} = this.props;
-    if (!formValid) {
-      alert('请填写正确的信息后重试');
-      return;
-    }
-
-    fetch("http://localhost:3000/user", {
-      method:'post',
-      body:JSON.stringify({
-        name: name.value,
-        age: age.value,
-        gender: gender.value
-      }),
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    })
-    .then((res)=>res.json())
-    .then((res)=>{
-      // 当添加成功时，返回的json对象中应包含一个有效的id字段
-      // 所以可以使用res.id来判断添加是否成功
-      if (res.id) {
-          alert('添加用户成功');
-          this.context.router.push('/user/list');
-          return;
-        } else {
-          alert('添加失败');
-          return
-        }
-    })
-    .catch((err)=>console.error(err))
-  }
+  
 
   render () {
     const {form: {name, age, gender}, onFormChange} = this.props;
