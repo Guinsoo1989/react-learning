@@ -1,6 +1,7 @@
 import React from 'react';
 import HomeLayout from '../layouts/HomeLayout'
 import PropTypes from 'prop-types'
+import reques, {get} from '../utils/request';
 
 class UserList extends React.Component {
 
@@ -12,8 +13,7 @@ class UserList extends React.Component {
   }
 
   componentWillMount () {
-    fetch('http://localhost:3000/user')
-      .then(res => res.json())
+    get('http://localhost:3000/user')
       .then(res => {
         this.setState({
           userList: res

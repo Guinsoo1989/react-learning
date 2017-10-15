@@ -2,6 +2,7 @@ import React from 'react';
 import HomeLayout from '../layouts/HomeLayout';
 import BookEditor from '../components/BookEditor';
 import PropTypes from 'prop-types';
+import request, {get} from '../utils/request';
 
 class BookEdit extends React.Component {
   constructor (props) {
@@ -13,8 +14,7 @@ class BookEdit extends React.Component {
 
   componentWillMount () {
     const bookId = this.context.router.params.id;
-    fetch('http://localhost:3000/book/' + bookId)
-      .then(res => res.json())
+    get('http://localhost:3000/book/' + bookId)
       .then(res => {
         this.setState({
           book: res
