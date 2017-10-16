@@ -32,21 +32,21 @@ class UserEditor extends React.Component {
       method = 'put';
     }
 
-    // request(method, apiUrl, {
-    //   name: name.value,
-    //   age: age.value,
-    //   gender: gender.value
-    // })
-    //   .then((res)=>{
-    //     if (res.id) {
-    //       alert(editType + '用户成功');
-    //       this.context.router.push('/user/list');
-    //       return;
-    //     } else {
-    //       alert(editType + '失败');
-    //     }
-    //   })
-    //   .catch((err)=>console.error(err))
+    request(method, apiUrl, {
+      name: name.value,
+      age: age.value,
+      gender: gender.value
+    })
+      .then((res)=>{
+        if (res.id) {
+          alert(editType + '用户成功');
+          this.context.router.push('/user/list');
+          return;
+        } else {
+          alert(editType + '失败');
+        }
+      })
+      .catch((err)=>console.error(err))
   }
   
     render () {
